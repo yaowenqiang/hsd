@@ -83,4 +83,39 @@ removeOdd nums =
         else removeOdd (tail nums)
 
 
+-- tuples
+--
 
+x = (1, "hello")
+y = ("PI", 3.141592, [1,2,3], "four")
+
+headAndLenght list =  (head list, length list)
+
+fst (1, "hello")
+
+snd (1, "hello")
+
+-- Tuple Warning
+-- Big tuples
+-- Tuples spanning different parts of an application
+
+
+-- Pattern Matching
+
+fst' (a, b) = a
+snd' (a, b) = b
+
+-- Pattern Mathcing Lists
+--
+--
+null' [] = True
+null' (x:xs) = False
+
+
+head' (x:xs) = x
+head' [] = ?
+head' [] =  error "head of empty list"
+
+
+double [] = []
+double (x:xs) = (2*x) : (double xs)
