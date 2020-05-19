@@ -119,3 +119,329 @@ head' [] =  error "head of empty list"
 
 double [] = []
 double (x:xs) = (2*x) : (double xs)
+
+
+-- Guards
+--
+
+pow2 n 
+    | n == 0    = 1
+    | otherwise = 2 * (pw2 (n-1))
+
+
+removeOdd [] = []
+removeOdd (x:xs)
+    | mod x 2 == 0     = x : (removeOdd xs)
+    | otherwise        = removeOdd xs
+
+
+-- Case Expressions
+--
+--
+
+double nums = case nums of
+    []   -> []
+    (x : xs) -> (2*x) : (double xs)
+
+
+anyEven nums = case (removeOdd nums) of
+    [] -> False
+    (x:xs -> True)
+
+
+-- Let Binding
+--
+fancySeven = 
+    let a = 3
+    in 2 * a + 1
+
+fancyInne = 
+    let x = 4
+        y = 5
+    in x + y
+
+numEven nums = 
+    let evenNums = removeOdd nums
+    in length evenNums
+
+
+-- Where Binding
+--
+-
+fancySeven = 2 * a + 1
+    where a = 3
+
+
+fancyNine = x + y
+    where x = 4
+          y = 5
+
+
+-- "Where" goes with a functio definition
+--
+
+-- fancyten = 2 * (a + 1 where a = 4)
+ fancyten = 2 * (let a = 4 in a + 1)
+
+
+-- Where top down
+-- Let - bottom up
+--
+--
+
+
+-- Whitespaces
+-- Do not use tabs, Ever-
+
+
+-- indent further when breaking expression onto another line
+pairMax p = max ( fst p)
+                (snd p)
+
+pairMax p = max ( fst p)
+            (snd p)
+
+pairMax p = max ( fst p)
+    (snd p) -- error
+
+-- Line up variable bindings
+--
+
+
+fancyNine = 
+let x = 4
+    y = 5
+in x + y
+
+
+
+fancyNine = 
+let x = 4 
+y = 5       -- error
+in x + y
+
+
+-- Lazy
+--
+--
+
+foo (alpha 1)  (beta 2)
+
+
+
+intsFrom n = n : (intsFrom (n + 1))
+
+ints = intsFrom 1
+
+take 10 ints
+
+
+
+-- Higher Order Functions
+pass3 f = f 3
+-- pass3 sqrt
+
+add1 x = x + 1
+
+pass3 add1
+
+compose f g x = f ( g x)
+
+add1 x = x + 1
+mult2 x = 2 * x
+
+compose add1 mult2 4
+-- 9   add1 ( mult2 4) = (2 * 4) + 1 = 9
+
+
+always7 x = 7
+always7' = const 7
+
+(const 7) 5
+
+
+-- Partial Application
+--
+--
+foo x y z = x + y + z
+foo_1_2 = foo 1 2
+foo_1_2 3  -- 6
+
+
+pass x f = f x
+pass3 = pass 3
+
+
+
+-- Operators
+--
+--
+
+(+) 5 3
+
+pass_3_4 f = f 3 4
+pass_3_4 (+)
+
+-- new operator definitions
+(a, b) .+ (c,d) = (a+c, b+d)
+
+plus1 = (+) 1
+plus1' = (1+)
+plus1'' = (+1)
+
+-- Turning functions into operators
+--
+mod 10 2
+
+10 `mod` 2 -- not single qoute ,backtick
+
+
+-- Map
+--
+
+map length ["hello", "abc", "1234"]
+
+
+map (1+) [1,3,4,5]
+
+
+double = map (2*)
+    
+
+-- Filter
+--
+
+notNull xs = not (null xs)
+
+
+filter notNull ["", "abc", "", "hello", ""]
+
+
+isEven x = x `mod` 2 == 0
+
+removeOdd = filter isEven
+
+
+map snd (filter fst |[True, 1),(False, 7), (True, 11) ])
+
+
+-- Fold
+-- foldl
+
+
+foldl (+) 0 [1,2,3,4]
+-- 10 -- 0 + 1 + 2 + 3 + 4 = 10
+--
+--
+--
+
+
+showPlus s x = "(" ++ s ++ "+" ++ (show x) ++ ")"
+
+--show functio nconvert number to sting
+
+
+showPlus "(1+2)" 3
+
+-- "((1+2)+3)"
+
+foldl showPlus "0" [1,2,3,4]
+--"((((0+1)+2)+3)+4)"
+
+
+-- foldr
+--
+--
+foldr (+) 0 [1,2,3,4]
+
+-- 10 -- 1 + 2 + 3 + 4  + 0 == 10
+--
+--
+--
+--
+--
+showPlus'  x s = "("  ++ (show x) ++ "+" ++ s ++ ")"
+
+foldr showPlus' "0" [1,2,3,4]
+
+--"(1+(2+(3+(4+0))))"
+
+
+
+foldl (-) 0 [1,2,3]
+--(((0-1) - 2) - 3)
+
+
+foldr (-) 0 [1,2,3]
+
+-- 1 - (2 - (3 - 0)) = 2
+--
+
+
+-- foldl slighty faster
+--
+
+-- foldr infinite lists
+--
+--
+
+-- Zip
+--
+--
+zip [1,2,3] [4,5,6] -- [(1,4),(2,5),(3,6)]
+
+zipWith  (+) [1,2,3] [4,5,6] -- [5,7,9]
+
+
+plus3 x y z = x + y + z
+
+zipWith3 plus3 [1,2,3] [4,5,6] [7,8,9]
+
+--Lambda Expressions
+--
+
+-- \ menas lambda expression
+zipWith3 (\ x y z -> x + y + z) [1,2,3] [4,5,6] [7,8,9]
+
+map (\x -> 2 +x) [1,2,3]
+
+
+map (2*) [1,2,3]
+
+map (\x -> 2 * x + 1) [1,2,3]
+
+
+-- Function operators
+-- a . b a and b both must have only 1 arguments
+--
+--
+
+
+(.) - Function Composition
+($) - function Application
+
+
+stringLength = length . show
+
+stringLength' x = length ( show x) -- from right to left
+
+notNull = not . null
+
+
+f a b = a + b
+g x = 2 * x
+
+f . g
+
+
+f $ x = f x
+
+f $ g x = f (g x)
+
+f $ g $ h $ k x = f ( g (h (k x)))
+
+map (\f -> f 3) [(+1), (\x -> 2 * x + 3), (*2)] 
+-- [4, 9 , 6]
+--
+map ($3) [(+1), (\x -> 2*x + 3), (*2)]
+[4,9.6]
