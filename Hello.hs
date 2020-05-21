@@ -445,3 +445,12 @@ map (\f -> f 3) [(+1), (\x -> 2 * x + 3), (*2)]
 --
 map ($3) [(+1), (\x -> 2*x + 3), (*2)]
 [4,9.6]
+
+quicksort [] = []
+quicksort (p:xs) = (quicksort lesser) ++ [p] ++ (quicksort greater)
+    where
+        lesser = filter ( < p) xs
+        greater = filter (>= p) xs
+
+qsort' (p:xs) = qsort' [x | x<-xs, x<p] ++ [p] ++ qsort' [x | x<-xs, x>=p]
+
