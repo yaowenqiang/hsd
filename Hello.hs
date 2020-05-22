@@ -454,3 +454,17 @@ quicksort (p:xs) = (quicksort lesser) ++ [p] ++ (quicksort greater)
 
 qsort' (p:xs) = qsort' [x | x<-xs, x<p] ++ [p] ++ qsort' [x | x<-xs, x>=p]
 
+
+-- Type Ssytems
+
+-- Statically typed
+-- types are inferred
+-- Don't have to write our explicit types
+-- Explicit types communicate with PEOPLE, checked by compiler
+--
+--
+-- Exploring Types in GHCI
+-- :t -Print the type of  an expression
+-- let z = 3
+-- :t z  :: Num p => p
+-- :t lines
