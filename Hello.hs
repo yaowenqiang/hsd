@@ -468,3 +468,29 @@ qsort' (p:xs) = qsort' [x | x<-xs, x<p] ++ [p] ++ qsort' [x | x<-xs, x>=p]
 -- let z = 3
 -- :t z  :: Num p => p
 -- :t lines
+--
+--
+-- Explicit Type
+
+str :: [Char] -- not necessary
+str = "hello"
+
+-- Explicit Function Type
+--
+--
+foo :: Int -> Int
+foo x = 2 * x + 1
+
+addInt3 :: Int -> INt -> Int -> Int
+addInt3 x y z = x + y + z
+
+-- Type Annotation
+--
+
+x = 3 :: Int
+y = (3 :: Int) + (2.1 :: Double) -- error
+
+y' = 3 + 2.1
+
+
+
