@@ -493,4 +493,104 @@ y = (3 :: Int) + (2.1 :: Double) -- error
 y' = 3 + 2.1
 
 
+-- When to use Explicit Types
+-- communicating with people
+--
+
+mystery :: [Char] -> Int
+
+-- Tracking down compiler errors
+--
+--
+
+whats_wrong = x + y
+    where x = length "hello"
+          y = 6/2
+
+
+whats_wrong' = x + y
+    where x :: Int 
+          x = length "hello"
+          y :: Int
+          y = 6/2
+-- Help the complier
+
+x = show (read "123") -- error
+x' = show (read "123" :: Int)
+
+-- Optimizing Performance
+--
+
+foo = x * y + z
+    where x = 32
+          y = 42
+          z = -5
+
+foo' :: Int
+foo' = x * y + z
+    where x = 32
+          y = 42
+          z = -5
+-- not until you hvae to
+--
+-- Polymorphic Functions A function with a type variable
+--
+
+length_ints :: [Int] -> Int
+length_ints [] = 0
+length_ints (x:xs) = length_ints xs + 1
+
+length_chars :: [char]  -> Int
+length_ints [] = 0
+length_chars (x:xs) = length_chars xs + 1
+
+
+length [] = 0
+length (x:xs) = length xs + 1
+
+length :: [a] -> Int -- a is a placeholder for any type
+length [] = 0
+length (x:xs) = lenghh xs + 1
+
+
+empty_lenght :: [a]
+empty_lenght = []
+
+list_double = 3.2 : empty
+list_char = 'a' : empty_llist
+
+
+head :: [a] => a
+head (x:xs) => x
+
+badHead [a]  -> b
+badHead (x : xs) = x --error
+
+ibad = (bad Head [1.2, 2, 4]) : "foo"
+
+
+-- Type Class Constraints(约束)
+length :: [a] -> Int
+length [] -> 0
+length (x:xs) = 1 + length xs
+
+
+badSum [a] -> a
+badSum [] = 0
+badSum (x:xs) => x + sum xs
+
+
+sum [] = 0
+sum (x:xs) = x + sum xs
+
+
+sum :: Num a => [a] -> a -- => me menas constraints of a, a must be a Num type 
+sum [] = 0
+sum (x : xs) = x + sum xs
+
+show :: Show a => a -> String -- Show menas a  must be a type that has string representation
+
+showSum :: (Num a, Show a) => [a] -> [Char]
+showSum xs = show (sum xs)
+3.1 :: Fractional p => p -- 分类
 
