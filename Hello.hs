@@ -625,3 +625,70 @@ p2 = (3,4)
 
 mid :: (Double, Double)
 mid = midpoint p1 p2
+
+
+-- New Type
+--
+--
+
+newtype CustomeId = MakeCustomerId Int -- MakeCustomerId is the type constructor
+
+badCustomer :: CustomerId
+badCustomer = 13 -- error
+
+
+custoemr :: CustomeId
+customer = MakeCustomerId 13
+
+cusatomerToInt :: CustomerId -> Int
+cusatomerToInt (MakeCustomerId i) = i
+
+
+newtype CustomerId = CustomerId Int
+
+customer :: CustomerId
+customer = CustomerId 13
+
+customerToInt :: CustomerId -> Int
+customerToInt (CustomerId i) = i
+
+-- Records
+
+data Customer = MakeCustomer
+{
+    customerId :: CustomerId
+   ,name      :: String
+   ,luckyNumber :: Int
+}
+
+
+alice :: Customer
+
+alice = MakeCustomer 
+{ customerId = MakeCustomerId 13
+    , name   = "Alice"
+    , luckyNumber = 42
+}
+
+customerId alice -- get record field customerId
+
+-- update Recores (creaqte a new record)
+
+sally = alice {name = "Sally", luckyNumber = 33}
+
+-- Records are Not extensible
+-- No shared field names, two records can't have the same name fields
+
+data Customer = Customer 
+{name :: String
+,customerId :: CustomerId
+}
+data Supplier = Supplier 
+{name :: String
+,supplierId :: SupplierId
+}
+
+-- error
+
+
+
