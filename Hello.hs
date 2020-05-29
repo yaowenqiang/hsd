@@ -688,6 +688,19 @@ data Supplier = Supplier
 ,supplierId :: SupplierId
 }
 
+--Algebraic Data Types
+--
+--
+
+data Customer = MakeCustomer CustomerId String int
+data Customer = Customer CustomerId String int
+
+alice :: Customer
+alice = Customer (CustomerId 13) "Alice" 42
+
+getCustoemrId :: Custoemr -> CustoemrId
+getCustoemrId (Custoemr cust id name luckerNumber) = cust_id
+
 -- error
 
 
