@@ -700,6 +700,57 @@ alice = Customer (CustomerId 13) "Alice" 42
 
 getCustoemrId :: Custoemr -> CustoemrId
 getCustoemrId (Custoemr cust id name luckerNumber) = cust_id
+getCustoemrId (Custoemr cust_id _ _) = cust_id
+
+-- Newtype, but with more arguments
+--
+
+data Customer = Customer CustomerId String Int
+
+newtype CustomerId = CustoemrId Int
+
+-- Tuples, but with names
+--
+
+x :: (Double, Double, Double)
+
+data RGB = RGB Double Double Double
+x :: RGB
+
+data StringThree = StringThree String [StringTree]
+
+hierarchy = StringTree "C:"
+            [
+                StringTree "Program Files" []
+              , StringTree "Users"
+                   [StringTree "Alices" []]
+              , StringTree "Cats" []
+            ]
+
+ 
+-- Algebraic Data Type Constructors
+--
+
+data Bool = False | True
+
+x :: Bool
+x = False
+y :: Bool
+y = True
+
+
+negate :: Bool -> Bool
+negate True = False
+negate False = True
+
+
+data DialogResponse = Yes | No | Help  | Quit
+
+data MaybeInt = NoInt | JustInt Int
+
+defaultInt :; Int -> MaybeInt -> Int
+defaultInt defaultValue NotInt  = defaultValue
+defaultInt _ (JustInt x) = x
 
 -- error
 
