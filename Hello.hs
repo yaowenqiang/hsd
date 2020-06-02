@@ -752,7 +752,66 @@ defaultInt :; Int -> MaybeInt -> Int
 defaultInt defaultValue NotInt  = defaultValue
 defaultInt _ (JustInt x) = x
 
+data StringList = EmptyStringList
+                | ConsStringList String StringList
+
+
+lengthStringList :: StringList -> INt
+lengthStringList EmptyStringList = 0
+
+lengthStringList (ConsStringList _ xs) =
+    1 + lengthStringList xs
+
+
+length :: [a] -> Int
+length [] = 0
+length (_ : xs) = 1 + lenght xs
+
+-- Parameterized Types
+--
+--
+
+data Maybe a = Just a | Nothing
+x :: Maybe Int
+x = Nothing
+
+fromMaybe :: a -> Maybe a -> a
+fromMaybe defaultVal Nothing = defaultVal
+fromMaybe _ (Just x) = x
+
+
+data List a = Empty | Cons a (List a)
+
+data Map k a = ...
+
+
+--Tyep Classes
+--
+
+--Type Class Instances
+--
+--
+
+elem :: Eq a => a -> [a] -> Bool
+elem _ [] = False
+elem x ( y : ys)
+    | x == y = True
+    | otherwise = elem x ys
+
+
+
+data RGB = RGB Int Int Int
+
+colors = [RGB 255 0 0 , RGB 0 255 0, RGB 0 0 255]
+green = RGB 0 255 0
+greenInColors = elem green colors
+
+instance Eq RGB where
+    (RGB r1 g1 b1) == (RGB r2 g2 b2) = 
+    (r1 == r2) && (g1 == g2) && (b1 == b2)
+
 -- error
+
 
 
 
