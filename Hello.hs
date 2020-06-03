@@ -810,6 +810,32 @@ instance Eq RGB where
     (RGB r1 g1 b1) == (RGB r2 g2 b2) = 
     (r1 == r2) && (g1 == g2) && (b1 == b2)
 
+
+
+-- Type Class Instances for Parameterized Types
+--
+
+data Maybe' a = Nothing' | Just' a
+
+
+instance Eq (Maybe' a) where
+    Nothing' == Nothing' = True
+    Nothing' == (Just' _) = False
+    (Just' _) == Nothing' = False
+    (Just' x) = (Just' y) = x == y
+
+instance (Eq a) =>  (Maybe' a) where
+    Nothing' == Nothing' = True
+    Nothing' == (Just' _) = False
+    (Just' _) == Nothing' = False
+    (Just' x) = (Just' y) = x == y
+
+-- error
+
+
+
+
+
 -- error
 
 
