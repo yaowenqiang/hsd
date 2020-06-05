@@ -688,6 +688,154 @@ data Supplier = Supplier
 ,supplierId :: SupplierId
 }
 
+--Algebraic Data Types
+--
+--
+
+data Customer = MakeCustomer CustomerId String int
+data Customer = Customer CustomerId String int
+
+alice :: Customer
+alice = Customer (CustomerId 13) "Alice" 42
+
+getCustoemrId :: Custoemr -> CustoemrId
+getCustoemrId (Custoemr cust id name luckerNumber) = cust_id
+getCustoemrId (Custoemr cust_id _ _) = cust_id
+
+-- Newtype, but with more arguments
+--
+
+data Customer = Customer CustomerId String Int
+
+newtype CustomerId = CustoemrId Int
+
+-- Tuples, but with names
+--
+
+x :: (Double, Double, Double)
+
+data RGB = RGB Double Double Double
+x :: RGB
+
+data StringThree = StringThree String [StringTree]
+
+hierarchy = StringTree "C:"
+            [
+                StringTree "Program Files" []
+              , StringTree "Users"
+                   [StringTree "Alices" []]
+              , StringTree "Cats" []
+            ]
+
+ 
+-- Algebraic Data Type Constructors
+--
+
+data Bool = False | True
+
+x :: Bool
+x = False
+y :: Bool
+y = True
+
+
+negate :: Bool -> Bool
+negate True = False
+negate False = True
+
+
+data DialogResponse = Yes | No | Help  | Quit
+
+data MaybeInt = NoInt | JustInt Int
+
+defaultInt :; Int -> MaybeInt -> Int
+defaultInt defaultValue NotInt  = defaultValue
+defaultInt _ (JustInt x) = x
+
+data StringList = EmptyStringList
+                | ConsStringList String StringList
+
+
+lengthStringList :: StringList -> INt
+lengthStringList EmptyStringList = 0
+
+lengthStringList (ConsStringList _ xs) =
+    1 + lengthStringList xs
+
+
+length :: [a] -> Int
+length [] = 0
+length (_ : xs) = 1 + lenght xs
+
+-- Parameterized Types
+--
+--
+
+data Maybe a = Just a | Nothing
+x :: Maybe Int
+x = Nothing
+
+fromMaybe :: a -> Maybe a -> a
+fromMaybe defaultVal Nothing = defaultVal
+fromMaybe _ (Just x) = x
+
+
+data List a = Empty | Cons a (List a)
+
+data Map k a = ...
+
+
+--Tyep Classes
+--
+
+--Type Class Instances
+--
+--
+
+elem :: Eq a => a -> [a] -> Bool
+elem _ [] = False
+elem x ( y : ys)
+    | x == y = True
+    | otherwise = elem x ys
+
+
+
+data RGB = RGB Int Int Int
+
+colors = [RGB 255 0 0 , RGB 0 255 0, RGB 0 0 255]
+green = RGB 0 255 0
+greenInColors = elem green colors
+
+instance Eq RGB where
+    (RGB r1 g1 b1) == (RGB r2 g2 b2) = 
+    (r1 == r2) && (g1 == g2) && (b1 == b2)
+
+
+
+-- Type Class Instances for Parameterized Types
+--
+
+data Maybe' a = Nothing' | Just' a
+
+
+instance Eq (Maybe' a) where
+    Nothing' == Nothing' = True
+    Nothing' == (Just' _) = False
+    (Just' _) == Nothing' = False
+    (Just' x) = (Just' y) = x == y
+
+instance (Eq a) =>  (Maybe' a) where
+    Nothing' == Nothing' = True
+    Nothing' == (Just' _) = False
+    (Just' _) == Nothing' = False
+    (Just' x) = (Just' y) = x == y
+
+-- error
+
+
+
+
+
 -- error
 
 
