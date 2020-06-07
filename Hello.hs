@@ -830,13 +830,45 @@ instance (Eq a) =>  (Maybe' a) where
     (Just' _) == Nothing' = False
     (Just' x) = (Just' y) = x == y
 
--- error
 
 
+--Deriving Type Class instances
+--
+
+data RGB = RGB Int Int Int
+instance Eq RGB where
+    (RGB r1 g1 b1) == (RGB r2 g2 b2) = 
+        (r1 == r2) && (g1 == g2) && (b1 == b2)
 
 
+data Person = Person String Int Int
+instance Eq Person where
+(PErson name1 age1 height1) == 
+  (Person name2 age2 height2) = 
+    (name1 == name2) && (age1 == age2) &&
+    (height1 == height2)
 
--- error
+
+data RGB = RGB Int Int Int
+    deriving Eq
+
+---Deriving Type Class Instances
+--
+--Eq
+--  Deriving - components-wise equality
+--Ord
+--  (<),(>),(<=), (>=)
+--  Deriving - component-wise comparison
+--Show
+--  show
+--  Deriving-'{Constructor-name}{argument-1}{argument2}...
+--Read
+--  Read
+--  Deriving-parse output of default show
+--
+--
+
+
 
 
 data Thing = Shoe
