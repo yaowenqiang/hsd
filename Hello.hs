@@ -867,8 +867,49 @@ data RGB = RGB Int Int Int
 --  Deriving-parse output of default show
 --
 --
+--Subclasses of Type Classes
+--
+
+class (Eq a) => Ord a where
+    (<) :: a -> a -> Bool
+    (>) :: a -> a -> Bool
+    (<=) :: a -> a -> Bool
+    (>=) :: a -> a -> Bool
+    compare :: a -> a -> Ordering
+    max :: a -> a -> a
+    min :: a -> a -> a
+
+data  Ordering = LT | EQ | GT
+
+-- Mini`mum complete definition : compare or (<=)
 
 
+data Point2 = Point2 Double Double
+deriving Show
+data Point3 = Point3 Double Double Double
+deriving Show
+
+
+class Measurable a where
+distance :: a -> a -> Double
+
+class (Measurable a, Show a) -> Direction a where
+getDirections :: a -> a -> String
+
+getDirections p1 p2 =
+    "Go from " ++ (show p1) ++
+    " towards" ++ (show p2) ++ 
+    " and stop after " ++ (show (distance p1 p2))
+
+
+instance Directions Point3 where
+getDirections p1 p2 = 
+    "Fly from" ++ (show p1) ++
+    " towards" ++ (show p2) ++ 
+    " and stop after " ++ (show (distance p1 p2))
+
+
+instance Directions Point2 where
 
 
 data Thing = Shoe
