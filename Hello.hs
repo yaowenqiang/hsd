@@ -911,6 +911,13 @@ getDirections p1 p2 =
 
 instance Directions Point2 where
 
+quickSort :: (Ord a) => [a] -> [a]
+quickSort [] = []
+quickSort (x:xs) = 
+    let smallerSorted = quickSort [a | a <- xs, a <= x]
+        biggerSorted = quickSort [a | a <- xs, a > x]
+    in smallerSorted ++ biggerSorted
+
 
 data Thing = Shoe
            | Ship
